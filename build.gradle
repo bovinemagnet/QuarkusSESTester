@@ -1,0 +1,52 @@
+plugins {
+    id 'java'
+    id "io.quarkus" version "${quarkusPluginVersion}"
+}
+
+group = 'com.example'
+version = '1.0.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(javaVersion as int)
+    }
+}
+
+dependencies {
+    implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+
+    // Quarkus core + picocli CLI
+    implementation 'io.quarkus:quarkus-picocli'
+    implementation 'io.quarkus:quarkus-arc'
+
+    // AWS SDK v2 SES v2
+    implementation platform('software.amazon.awssdk:bom:2.31.16')
+    implementation 'software.amazon.awssdk:sesv2'
+    implementation 'software.amazon.awssdk:url-connection-client'
+
+    // Simple Java Mail - used only for MIME construction (not SMTP)
+    implementation('org.simplejavamail:simple-java-mail:8.12.6') {
+        // Exclude the SMTP batch module and other unused optional extras
+        exclude group: 'org.simplejavamail', module: 'batch-module'
+    }
+
+    // dotenv loader for .env file support
+    implementation 'io.github.cdimascio:dotenv-java:3.0.0'
+
+    // Test dependencies
+    testImplementation 'io.quarkus:quarkus-junit5'
+    testImplementation 'io.quarkus:quarkus-test-common'
+    testImplementation 'org.assertj:assertj-core:3.27.7'
+}
+
+test {
+    systemProperty "java.util.logging.manager", "org.jboss.logmanager.LogManager"
+    useJUnitPlatform()
+}
+
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
