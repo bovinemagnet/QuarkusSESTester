@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>QuarkusSESTester - Node Network</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline-variant": "#484847",
+                      "on-tertiary-fixed-variant": "#70165a",
+                      "on-error": "#490013",
+                      "surface-container-highest": "#262626",
+                      "on-secondary-fixed": "#00452d",
+                      "surface-container-high": "#20201f",
+                      "primary-fixed": "#8e98ff",
+                      "on-tertiary": "#71175b",
+                      "on-secondary": "#005a3c",
+                      "primary": "#9fa7ff",
+                      "tertiary-container": "#ff91da",
+                      "surface-container-lowest": "#000000",
+                      "background": "#0e0e0e",
+                      "on-primary-fixed": "#000000",
+                      "error-container": "#a70138",
+                      "on-secondary-fixed-variant": "#006544",
+                      "on-tertiary-fixed": "#3f0031",
+                      "surface": "#0e0e0e",
+                      "inverse-on-surface": "#565555",
+                      "on-primary-fixed-variant": "#000a99",
+                      "on-primary-container": "#00077e",
+                      "on-surface": "#ffffff",
+                      "tertiary-fixed-dim": "#f084cc",
+                      "on-error-container": "#ffb2b9",
+                      "surface-variant": "#262626",
+                      "surface-dim": "#0e0e0e",
+                      "on-secondary-container": "#e1ffec",
+                      "tertiary-fixed": "#ff91da",
+                      "on-background": "#ffffff",
+                      "inverse-primary": "#3d4ae2",
+                      "error-dim": "#d73357",
+                      "surface-bright": "#2c2c2c",
+                      "on-primary": "#000ba0",
+                      "error": "#ff6e84",
+                      "tertiary-dim": "#f084cc",
+                      "secondary-fixed": "#69f6b8",
+                      "tertiary": "#ffa9df",
+                      "primary-dim": "#5562f9",
+                      "secondary": "#69f6b8",
+                      "on-tertiary-container": "#640950",
+                      "primary-container": "#8e98ff",
+                      "surface-container-low": "#131313",
+                      "primary-fixed-dim": "#7d88ff",
+                      "on-surface-variant": "#adaaaa",
+                      "secondary-container": "#006c49",
+                      "outline": "#767575",
+                      "secondary-fixed-dim": "#58e7ab",
+                      "surface-container": "#1a1a1a",
+                      "inverse-surface": "#fcf9f8",
+                      "secondary-dim": "#58e7ab",
+                      "surface-tint": "#9fa7ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "fontFamily": {
+                      "headline": ["Space Grotesk"],
+                      "body": ["Inter"],
+                      "label": ["Space Grotesk"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #0e0e0e; color: #ffffff; }
+        .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- SideNavBar (Shared Component) -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-[#131313] dark:bg-[#131313] flex flex-col h-full p-4 font-['Space_Grotesk'] tracking-tight z-50">
+<div class="mb-10 px-2">
+<h1 class="text-xl font-bold text-[#9fa7ff] uppercase tracking-widest">QuarkusSES</h1>
+<p class="text-[10px] text-gray-500 font-mono">Tester v1.2</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-gray-500 hover:text-gray-300 hover:bg-[#1a1a1a] transition-colors duration-200 rounded-lg scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-gray-500 hover:text-gray-300 hover:bg-[#1a1a1a] transition-colors duration-200 rounded-lg scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">description</span>
+<span>Templates</span>
+</a>
+<!-- Active Navigation State: Node Network -->
+<a class="flex items-center gap-3 px-3 py-2 text-[#9fa7ff] font-bold bg-[#20201f] rounded-lg scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">hub</span>
+<span>Node Network</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-gray-500 hover:text-gray-300 hover:bg-[#1a1a1a] transition-colors duration-200 rounded-lg scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Configuration</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-gray-500 hover:text-gray-300 hover:bg-[#1a1a1a] transition-colors duration-200 rounded-lg scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">terminal</span>
+<span>Logs</span>
+</a>
+</nav>
+<div class="mt-auto p-4 bg-surface-container rounded-xl">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+<span class="text-[10px] uppercase font-bold tracking-wider text-on-surface-variant">Global Sync</span>
+</div>
+<p class="text-[10px] text-on-surface-variant leading-relaxed opacity-70">Daemon mesh synchronized across 12 zones.</p>
+</div>
+</aside>
+<!-- TopAppBar (Shared Component) -->
+<header class="fixed top-0 right-0 left-64 h-14 z-40 bg-[#0e0e0e]/80 backdrop-blur-xl flex justify-between items-center px-8 w-full border-b border-[#484847]/15 font-['Space_Grotesk'] text-sm uppercase tracking-tighter">
+<div class="flex items-center gap-4">
+<span class="text-primary font-bold">Node Network</span>
+<span class="text-outline-variant px-2">/</span>
+<span class="text-on-surface-variant opacity-60">Fleet Monitoring</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2 text-[#9fa7ff] opacity-80 hover:opacity-100 transition-opacity cursor-default">
+<span class="material-symbols-outlined text-sm">sensors</span>
+<span>Daemon Status: Running</span>
+</div>
+<div class="flex items-center gap-2 text-gray-400 opacity-80 hover:opacity-100 transition-opacity cursor-default">
+<span class="material-symbols-outlined text-sm">account_tree</span>
+<span>SES Mock: Active</span>
+</div>
+<div class="h-4 w-[1px] bg-outline-variant opacity-30"></div>
+<button class="material-symbols-outlined text-gray-400 hover:text-white transition-opacity">search</button>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="pl-64 pt-14 pb-8 min-h-screen bg-surface">
+<div class="p-8 max-w-7xl mx-auto">
+<!-- Technical Overview Metrics -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+<div class="bg-surface-container-low p-6 rounded-xl flex flex-col gap-1 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-full h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+<span class="text-[10px] font-mono text-on-surface-variant uppercase tracking-widest">Active Daemons</span>
+<span class="text-4xl font-headline font-bold text-on-surface">1,024</span>
+<span class="text-[10px] text-secondary font-mono">+12 since last boot</span>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl flex flex-col gap-1 relative overflow-hidden group">
+<span class="text-[10px] font-mono text-on-surface-variant uppercase tracking-widest">Avg Latency</span>
+<span class="text-4xl font-headline font-bold text-primary">14ms</span>
+<span class="text-[10px] text-primary-fixed-dim font-mono">Mesh stability: 99.9%</span>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl flex flex-col gap-1 relative overflow-hidden group">
+<span class="text-[10px] font-mono text-on-surface-variant uppercase tracking-widest">Fleet Load</span>
+<span class="text-4xl font-headline font-bold text-on-surface">42%</span>
+<span class="text-[10px] text-on-surface-variant font-mono">Across 4 clusters</span>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl flex flex-col gap-1 relative overflow-hidden group">
+<span class="text-[10px] font-mono text-on-surface-variant uppercase tracking-widest">Dropped Frames</span>
+<span class="text-4xl font-headline font-bold text-error-dim">0.03%</span>
+<span class="text-[10px] text-error font-mono">Below threshold</span>
+</div>
+</div>
+<!-- Kinetic Node Map/List Container -->
+<div class="bg-surface-container p-1 rounded-2xl">
+<div class="flex items-center justify-between p-6 border-b border-outline-variant/10">
+<div class="flex items-center gap-4">
+<button class="px-4 py-2 bg-surface-container-high text-primary text-xs font-headline font-bold rounded-lg uppercase tracking-wider transition-all border border-primary/20">All Nodes</button>
+<button class="px-4 py-2 text-on-surface-variant text-xs font-headline font-bold hover:text-on-surface transition-all uppercase tracking-wider">Unhealthy</button>
+<button class="px-4 py-2 text-on-surface-variant text-xs font-headline font-bold hover:text-on-surface transition-all uppercase tracking-wider">Configuration Diff</button>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-[10px] font-mono text-outline-variant">FILTER BY IP:</span>
+<input class="bg-surface-container-low border-none focus:ring-1 focus:ring-primary text-xs font-mono py-1 px-3 rounded-md w-32 transition-all" placeholder="192.168.*" type="text"/>
+</div>
+</div>
+<div class="overflow-x-auto no-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-highest/30">
+<tr class="text-[10px] uppercase font-mono tracking-widest text-on-surface-variant">
+<th class="px-6 py-4 font-normal">Status</th>
+<th class="px-6 py-4 font-normal">Node ID / Fingerprint</th>
+<th class="px-6 py-4 font-normal">IP Address</th>
+<th class="px-6 py-4 font-normal">Uptime</th>
+<th class="px-6 py-4 font-normal">Latency</th>
+<th class="px-6 py-4 font-normal">Load</th>
+<th class="px-6 py-4 font-normal text-right">Operations</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/5">
+<!-- Node Row 1 -->
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(105,246,184,0.4)]"></div>
+<span class="text-[10px] font-bold text-secondary-fixed">LIVE</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="text-sm font-headline font-bold text-on-surface">DAEMON-ALPHA-09</span>
+<span class="text-[10px] font-mono text-outline-variant">SHA256: 9e3f...a291</span>
+</div>
+</td>
+<td class="px-6 py-5 text-sm font-mono text-primary/80">192.168.1.104</td>
+<td class="px-6 py-5 text-sm font-mono text-on-surface-variant">14d 2h 11m</td>
+<td class="px-6 py-5">
+<div class="flex items-end gap-1">
+<span class="text-sm font-headline font-bold text-on-surface">12</span>
+<span class="text-[10px] font-mono text-outline-variant mb-0.5">ms</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="w-24 h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[24%]"></div>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-surface-container-highest rounded-lg text-primary transition-all active:scale-90">
+<span class="material-symbols-outlined text-sm">network_ping</span>
+</button>
+<button class="p-2 hover:bg-surface-container-highest rounded-lg text-error transition-all active:scale-90">
+<span class="material-symbols-outlined text-sm">restart_alt</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Node Row 2 -->
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(105,246,184,0.4)]"></div>
+<span class="text-[10px] font-bold text-secondary-fixed">LIVE</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="text-sm font-headline font-bold text-on-surface">DAEMON-BETA-42</span>
+<span class="text-[10px] font-mono text-outline-variant">SHA256: f12d...00bb</span>
+</div>
+</td>
+<td class="px-6 py-5 text-sm font-mono text-primary/80">192.168.1.201</td>
+<td class="px-6 py-5 text-sm font-mono text-on-surface-variant">04d 18h 33m</td>
+<td class="px-6 py-5">
+<div class="flex items-end gap-1">
+<span class="text-sm font-headline font-bold text-on-surface">28</span>
+<span class="text-[10px] font-mono text-outline-variant mb-0.5">ms</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="w-24 h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-[88%]"></div>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-surface-container-highest rounded-lg text-primary transition-all active:scale-90">
+<span class="material-symbols-outlined text-sm">network_ping</span>
+</button>
+<button class="p-2 hover:bg-surface-container-highest rounded-lg text-error transition-all active:scale-90">
+<span class="material-symbols-outlined text-sm">restart_alt</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Node Row 3 - Down State -->
+<tr class="hover:bg-surface-container-high transition-colors group bg-error/5">
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-error shadow-[0_0_8px_rgba(255,110,132,0.4)]"></div>
+<span class="text-[10px] font-bold text-error">DOWN</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="text-sm font-headline font-bold text-on-surface opacity-50">DAEMON-GAMMA-11</span>
+<span class="text-[10px] font-mono text-error/60 uppercase">Critical Failure</span>
+</div>
+</td>
+<td class="px-6 py-5 text-sm font-mono text-outline-variant">192.168.2.14</td>
+<td class="px-6 py-5 text-sm font-mono text-outline-variant">--</td>
+<td class="px-6 py-5">
+<span class="text-[10px] font-mono text-error uppercase">TIMEOUT</span>
+</td>
+<td class="px-6 py-5">
+<div class="w-24 h-1.5 bg-surface-container-highest rounded-full overflow-hidden opacity-30">
+<div class="h-full bg-error w-0"></div>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 bg-error-container/20 hover:bg-error-container text-on-error-container rounded-lg transition-all active:scale-90 border border-error/20">
+<span class="material-symbols-outlined text-sm">restart_alt</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Node Row 4 -->
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(105,246,184,0.4)]"></div>
+<span class="text-[10px] font-bold text-secondary-fixed">LIVE</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex flex-col">
+<span class="text-sm font-headline font-bold text-on-surface">DAEMON-EPSILON-99</span>
+<span class="text-[10px] font-mono text-outline-variant">SHA256: d881...c01c</span>
+</div>
+</td>
+<td class="px-6 py-5 text-sm font-mono text-primary/80">10.0.0.122</td>
+<td class="px-6 py-5 text-sm font-mono text-on-surface-variant">31d 0h 54m</td>
+<td class="px-6 py-5">
+<div class="flex items-end gap-1">
+<span class="text-sm font-headline font-bold text-on-surface">9</span>
+<span class="text-[10px] font-mono text-outline-variant mb-0.5">ms</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="w-24 h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[55%]"></div>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-surface-container-highest rounded-lg text-primary transition-all active:scale-90">
+<span class="material-symbols-outlined text-sm">network_ping</span>
+</button>
+<button class="p-2 hover:bg-surface-container-highest rounded-lg text-error transition-all active:scale-90">
+<span class="material-symbols-outlined text-sm">restart_alt</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- HTMX Loading Indicator Fragment Simulation -->
+<div class="h-0.5 w-full relative">
+<div class="absolute inset-0 bg-tertiary w-1/3 blur-[1px]"></div>
+</div>
+</div>
+<!-- Asymmetric Metadata Panel -->
+<div class="mt-12 flex flex-col md:flex-row gap-8 items-start">
+<div class="flex-1 bg-surface-container-low p-8 rounded-2xl relative border-l-4 border-primary">
+<h3 class="font-headline font-bold text-lg mb-4 text-primary">Network Topology Strategy</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed max-w-prose mb-6">
+                        The current fleet is operating under a <span class="text-on-surface font-mono">mesh-v2</span> configuration. All daemons are reporting via encrypted Quarkus-SES tunnels. Nodes with high load (&gt;80%) are automatically queued for task-redistribution.
+                    </p>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container p-4 rounded-xl">
+<span class="block text-[10px] font-mono uppercase text-outline-variant mb-1">Tunnel Protocol</span>
+<span class="text-xs font-bold text-on-surface">mTLS v1.3 / AES-256</span>
+</div>
+<div class="bg-surface-container p-4 rounded-xl">
+<span class="block text-[10px] font-mono uppercase text-outline-variant mb-1">Sync Interval</span>
+<span class="text-xs font-bold text-on-surface">500ms (Jittered)</span>
+</div>
+</div>
+</div>
+<div class="w-full md:w-80 space-y-4">
+<div class="bg-surface-container p-6 rounded-2xl">
+<span class="text-[10px] font-mono text-outline-variant uppercase tracking-widest block mb-4">Event Stream</span>
+<div class="space-y-4">
+<div class="flex gap-3">
+<span class="text-primary material-symbols-outlined text-sm mt-0.5">info</span>
+<div class="flex flex-col gap-1">
+<span class="text-[11px] font-mono text-on-surface">Node ALPHA-09 ping successful</span>
+<span class="text-[9px] font-mono text-outline-variant uppercase">02:14:11 UTC</span>
+</div>
+</div>
+<div class="flex gap-3">
+<span class="text-error material-symbols-outlined text-sm mt-0.5">warning</span>
+<div class="flex flex-col gap-1">
+<span class="text-[11px] font-mono text-on-surface">Node GAMMA-11 heartbeat lost</span>
+<span class="text-[9px] font-mono text-outline-variant uppercase">02:12:05 UTC</span>
+</div>
+</div>
+<div class="flex gap-3">
+<span class="text-secondary material-symbols-outlined text-sm mt-0.5">check_circle</span>
+<div class="flex flex-col gap-1">
+<span class="text-[11px] font-mono text-on-surface">Fleet re-balancing complete</span>
+<span class="text-[9px] font-mono text-outline-variant uppercase">02:08:44 UTC</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="fixed bottom-0 right-0 left-64 h-8 bg-[#0e0e0e] flex justify-between items-center px-8 w-full border-t border-[#484847]/15 font-mono text-[10px] uppercase z-40">
+<div class="flex items-center gap-6">
+<span class="text-gray-600">v1.2.4-stable</span>
+<div class="flex items-center gap-4">
+<a class="text-gray-600 hover:text-[#ffa9df] transition-colors" href="#">Uptime: 14d 2h 11m</a>
+<a class="text-gray-600 hover:text-[#ffa9df] transition-colors" href="#">System Logs</a>
+<a class="text-gray-600 hover:text-[#ffa9df] transition-colors" href="#">API Status</a>
+</div>
+</div>
+<div class="flex items-center gap-2 text-[#ffa9df]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#ffa9df]"></span>
+<span>All systems nominal</span>
+</div>
+</footer>
+</body></html>

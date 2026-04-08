@@ -1,4 +1,4 @@
-package com.example.sesmail;
+package com.paulsnow.sesmail;
 
 /**
  * Typed exception for SES send failures, carrying an {@link ExitCode}.
@@ -7,7 +7,11 @@ public class SesMailException extends Exception {
 
     private final ExitCode exitCode;
 
-    public SesMailException(String message, Throwable cause, ExitCode exitCode) {
+    public SesMailException(
+        String message,
+        Throwable cause,
+        ExitCode exitCode
+    ) {
         super(message, cause);
         this.exitCode = exitCode;
     }

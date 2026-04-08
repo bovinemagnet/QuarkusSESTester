@@ -1,10 +1,9 @@
-package com.example.sesmail;
-
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
+package com.paulsnow.sesmail;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+import org.junit.jupiter.api.Test;
 
 class MailValidatorTest {
 
@@ -13,59 +12,95 @@ class MailValidatorTest {
     @Test
     void validRequest_hasNoErrors() {
         MailRequest request = new MailRequest(
-                "no-reply@customer.example.com",
-                "user@customer.example.com",
-                "Test subject",
-                "Test body text");
+            "no-reply@customer.example.com",
+            "user@customer.example.com",
+            "Test subject",
+            "Test body text"
+        );
         List<String> errors = validator.validate(request);
         assertThat(errors).isEmpty();
     }
 
     @Test
     void missingFrom_producesError() {
-        MailRequest request = new MailRequest(null, "user@example.com", "Subject", "Body");
+        MailRequest request = new MailRequest(
+            null,
+            "user@example.com",
+            "Subject",
+            "Body"
+        );
         List<String> errors = validator.validate(request);
         assertThat(errors).anyMatch(e -> e.contains("--send-from"));
     }
 
     @Test
     void blankFrom_producesError() {
-        MailRequest request = new MailRequest("  ", "user@example.com", "Subject", "Body");
+        MailRequest request = new MailRequest(
+            "  ",
+            "user@example.com",
+            "Subject",
+            "Body"
+        );
         List<String> errors = validator.validate(request);
         assertThat(errors).anyMatch(e -> e.contains("--send-from"));
     }
 
     @Test
     void invalidFromEmail_producesError() {
-        MailRequest request = new MailRequest("not-an-email", "user@example.com", "Subject", "Body");
+        MailRequest request = new MailRequest(
+            "not-an-email",
+            "user@example.com",
+            "Subject",
+            "Body"
+        );
         List<String> errors = validator.validate(request);
         assertThat(errors).anyMatch(e -> e.contains("--send-from"));
     }
 
     @Test
     void missingTo_producesError() {
-        MailRequest request = new MailRequest("from@example.com", null, "Subject", "Body");
+        MailRequest request = new MailRequest(
+            "from@example.com",
+            null,
+            "Subject",
+            "Body"
+        );
         List<String> errors = validator.validate(request);
         assertThat(errors).anyMatch(e -> e.contains("--send-to"));
     }
 
     @Test
     void invalidToEmail_producesError() {
-        MailRequest request = new MailRequest("from@example.com", "bad-email", "Subject", "Body");
+        MailRequest request = new MailRequest(
+            "from@example.com",
+            "bad-email",
+            "Subject",
+            "Body"
+        );
         List<String> errors = validator.validate(request);
         assertThat(errors).anyMatch(e -> e.contains("--send-to"));
     }
 
     @Test
     void blankSubject_producesError() {
-        MailRequest request = new MailRequest("from@example.com", "to@example.com", "", "Body");
+        MailRequest request = new MailRequest(
+            "from@example.com",
+            "to@example.com",
+            "",
+            "Body"
+        );
         List<String> errors = validator.validate(request);
         assertThat(errors).anyMatch(e -> e.contains("--send-subject"));
     }
 
     @Test
     void blankBody_producesError() {
-        MailRequest request = new MailRequest("from@example.com", "to@example.com", "Subject", "   ");
+        MailRequest request = new MailRequest(
+            "from@example.com",
+            "to@example.com",
+            "Subject",
+            "   "
+        );
         List<String> errors = validator.validate(request);
         assertThat(errors).anyMatch(e -> e.contains("--send-body"));
     }
@@ -87,7 +122,12 @@ class MailValidatorTest {
 
     @Test
     void gmailSender_producesWarning() {
-        MailRequest request = new MailRequest("user@gmail.com", "to@example.com", "Subj", "Body");
+        MailRequest request = new MailRequest(
+            "user@gmail.com",
+            "to@example.com",
+            "Subj",
+            "Body"
+        );
         List<String> warnings = validator.warnings(request);
         assertThat(warnings).isNotEmpty();
     }
@@ -95,7 +135,11 @@ class MailValidatorTest {
     @Test
     void differentDomains_producesWarning() {
         MailRequest request = new MailRequest(
-                "from@domain-a.com", "to@domain-b.com", "Subj", "Body");
+            "from@domain-a.com",
+            "to@domain-b.com",
+            "Subj",
+            "Body"
+        );
         List<String> warnings = validator.warnings(request);
         assertThat(warnings).anyMatch(w -> w.contains("different domains"));
     }
@@ -103,7 +147,11 @@ class MailValidatorTest {
     @Test
     void sameDomain_noWarningForDomainMismatch() {
         MailRequest request = new MailRequest(
-                "from@example.com", "to@example.com", "Subj", "Body");
+            "from@example.com",
+            "to@example.com",
+            "Subj",
+            "Body"
+        );
         List<String> warnings = validator.warnings(request);
         // No cross-domain warning expected
         assertThat(warnings).noneMatch(w -> w.contains("different domains"));
@@ -112,7 +160,9 @@ class MailValidatorTest {
     @Test
     void emailValidation_validFormats() {
         assertThat(validator.isValidEmail("user@example.com")).isTrue();
-        assertThat(validator.isValidEmail("no-reply@subdomain.example.co.uk")).isTrue();
+        assertThat(
+            validator.isValidEmail("no-reply@subdomain.example.co.uk")
+        ).isTrue();
         assertThat(validator.isValidEmail("user+tag@example.org")).isTrue();
     }
 

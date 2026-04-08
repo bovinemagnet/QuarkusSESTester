@@ -1,11 +1,9 @@
-package com.example.sesmail;
+package com.paulsnow.sesmail;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import io.github.cdimascio.dotenv.DotenvBuilder;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -40,7 +38,9 @@ public class DotenvLoader {
     public Optional<String> get(String key) {
         try {
             String value = dotenv.get(key);
-            return (value != null && !value.isBlank()) ? Optional.of(value) : Optional.empty();
+            return (value != null && !value.isBlank())
+                ? Optional.of(value)
+                : Optional.empty();
         } catch (Exception e) {
             return Optional.empty();
         }
@@ -52,7 +52,9 @@ public class DotenvLoader {
     public String getOrDefault(String key, String defaultValue) {
         return get(key).orElseGet(() -> {
             String envValue = System.getenv(key);
-            return (envValue != null && !envValue.isBlank()) ? envValue : defaultValue;
+            return (envValue != null && !envValue.isBlank())
+                ? envValue
+                : defaultValue;
         });
     }
 
@@ -66,12 +68,16 @@ public class DotenvLoader {
                 } else if (Files.isRegularFile(p)) {
                     // dotenv-java expects a directory; derive it from the file path
                     builder = builder
-                            .directory(p.getParent() != null ? p.getParent().toString() : ".")
-                            .filename(p.getFileName().toString());
+                        .directory(
+                            p.getParent() != null
+                                ? p.getParent().toString()
+                                : "."
+                        )
+                        .filename(p.getFileName().toString());
                 }
             }
             return builder.load();
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             // Gracefully degrade when .env is absent or unreadable
             return Dotenv.configure().ignoreIfMissing().load();
         }

@@ -1,10 +1,9 @@
-package com.example.sesmail;
+package com.paulsnow.sesmail;
 
 /**
  * Process exit codes for the ses-mail-cli application.
  */
 public enum ExitCode {
-
     SUCCESS(0),
     INVALID_USAGE(1),
     CONFIG_ERROR(2),

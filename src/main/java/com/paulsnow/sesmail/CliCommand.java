@@ -1,13 +1,12 @@
-package com.example.sesmail;
+package com.paulsnow.sesmail;
 
-import io.quarkus.runtime.QuarkusApplication;
 import io.quarkus.runtime.annotations.QuarkusMain;
 import jakarta.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
-
-import java.util.List;
 
 /**
  * Main CLI command for ses-mail-cli.
@@ -30,53 +29,62 @@ import java.util.List;
  * </ul>
  */
 @Command(
-        name = "ses-mail-cli",
-        mixinStandardHelpOptions = true,
-        version = "1.0.0",
-        description = {
-                "Send a plain-text email through Amazon SES API v2 (HTTPS).",
-                "The sender identity must be verified in SES; see AWS docs for prerequisites.",
-                "",
-                "NOTE: SES cannot be used to impersonate domains you do not own or control.",
-                "      --send-from must correspond to an SES-verified sender identity."
-        }
+    name = "ses-mail-cli",
+    mixinStandardHelpOptions = true,
+    version = "1.0.0",
+    description = {
+        "Send a plain-text email through Amazon SES API v2 (HTTPS).",
+        "The sender identity must be verified in SES; see AWS docs for prerequisites.",
+        "",
+        "NOTE: SES cannot be used to impersonate domains you do not own or control.",
+        "      --send-from must correspond to an SES-verified sender identity.",
+    }
 )
 public class CliCommand implements Runnable {
 
-    @Option(names = "--dry-run",
-            description = "Validate and preview the message without calling SES.")
+    @Option(
+        names = "--dry-run",
+        description = "Validate and preview the message without calling SES."
+    )
     boolean dryRun;
 
-    @Option(names = "--send-from",
-            description = "Sender email address (must be SES-verified).")
+    @Option(
+        names = "--send-from",
+        description = "Sender email address (must be SES-verified)."
+    )
     String sendFrom;
 
-    @Option(names = "--send-to",
-            description = "Recipient email address.")
+    @Option(names = "--send-to", description = "Recipient email address.")
     String sendTo;
 
-    @Option(names = "--send-subject",
-            description = "Email subject line.")
+    @Option(names = "--send-subject", description = "Email subject line.")
     String sendSubject;
 
-    @Option(names = "--send-body",
-            description = "Email plain-text body.")
+    @Option(names = "--send-body", description = "Email plain-text body.")
     String sendBody;
 
-    @Option(names = "--aws-region",
-            description = "AWS region for SES (default: from AWS_REGION env or .env).")
+    @Option(
+        names = "--aws-region",
+        description = "AWS region for SES (default: from AWS_REGION env or .env)."
+    )
     String awsRegion;
 
-    @Option(names = "--env-file",
-            description = "Path to a .env file (default: ./.env).")
+    @Option(
+        names = "--env-file",
+        description = "Path to a .env file (default: ./.env)."
+    )
     String envFile;
 
-    @Option(names = "--verbose",
-            description = "Enable verbose output (masks secrets).")
+    @Option(
+        names = "--verbose",
+        description = "Enable verbose output (masks secrets)."
+    )
     boolean verbose;
 
-    @Option(names = "--output",
-            description = "Output format: text (default) or json.")
+    @Option(
+        names = "--output",
+        description = "Output format: text (default) or json."
+    )
     String outputFormat;
 
     @Override
@@ -85,17 +93,18 @@ public class CliCommand implements Runnable {
         DotenvLoader dotenv = new DotenvLoader(envFile != null ? envFile : ".");
 
         // 2. Build merged config (CLI > env > .env > defaults)
-        AppConfig config = AppConfig.builder()
-                .from(sendFrom)
-                .to(sendTo)
-                .subject(sendSubject)
-                .body(sendBody)
-                .awsRegion(awsRegion)
-                .dryRun(dryRun)
-                .verbose(verbose)
-                .outputFormat(outputFormat)
-                .mergeFromDotenv(dotenv)
-                .build();
+        AppConfig.Builder configBuilder = AppConfig.builder()
+            .from(sendFrom)
+            .to(sendTo)
+            .subject(sendSubject)
+            .body(sendBody)
+            .awsRegion(awsRegion)
+            .outputFormat(outputFormat);
+        // Only set boolean flags when explicitly passed on the CLI,
+        // so mergeFromDotenv can distinguish "not set" from "set to false".
+        if (dryRun) configBuilder.dryRun(true);
+        if (verbose) configBuilder.verbose(true);
+        AppConfig config = configBuilder.mergeFromDotenv(dotenv).build();
 
         OutputRenderer renderer = new OutputRenderer(config.outputFormat());
 
@@ -107,9 +116,9 @@ public class CliCommand implements Runnable {
         MailValidator validator = new MailValidator();
         MailRequest request = config.toMailRequest();
 
-        List<String> errors = validator.validate(request);
-        List<String> regionErrors = validator.validateRegion(config.awsRegion());
-        errors.addAll(regionErrors);
+        List<String> errors = new ArrayList<>();
+        errors.addAll(validator.validate(request));
+        errors.addAll(validator.validateRegion(config.awsRegion()));
 
         if (!errors.isEmpty()) {
             errors.forEach(renderer::renderError);
@@ -127,8 +136,10 @@ public class CliCommand implements Runnable {
         try {
             rawMimeBytes = mimeFactory.buildRawMimeBytes(request);
             mimeHeaderPreview = mimeFactory.buildMimeHeaderPreview(request);
-        } catch (Exception e) {
-            renderer.renderError("ERROR: failed to build MIME message: " + e.getMessage());
+        } catch (jakarta.mail.MessagingException | java.io.IOException e) {
+            renderer.renderError(
+                "ERROR: failed to build MIME message: " + e.getMessage()
+            );
             System.exit(ExitCode.RUNTIME_ERROR.code());
             return;
         }
@@ -142,11 +153,12 @@ public class CliCommand implements Runnable {
 
         // 7. Real send
         SesMailSender sender = new SesMailSender(
-                config.awsRegion(),
-                config.sesEndpointOverride(),
-                config.sesConfigurationSet());
+            config.awsRegion(),
+            config.sesEndpointOverride(),
+            config.sesConfigurationSet()
+        );
         try {
-            String messageId = sender.send(rawMimeBytes, config.sesConfigurationSet());
+            String messageId = sender.send(rawMimeBytes);
             renderer.renderSuccess(messageId, config);
             System.exit(ExitCode.SUCCESS.code());
         } catch (SesMailException e) {

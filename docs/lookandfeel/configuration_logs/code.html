@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Configuration &amp; Logs - QuarkusSESTester</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0e0e0e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #262626;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #484847;
+        }
+        .glass-panel {
+            background: rgba(38, 38, 38, 0.6);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-fixed": "#69f6b8",
+                      "secondary-fixed-dim": "#58e7ab",
+                      "primary": "#9fa7ff",
+                      "on-tertiary-fixed": "#3f0031",
+                      "on-tertiary-container": "#640950",
+                      "secondary-container": "#006c49",
+                      "on-primary": "#000ba0",
+                      "inverse-surface": "#fcf9f8",
+                      "tertiary-dim": "#f084cc",
+                      "outline-variant": "#484847",
+                      "error-dim": "#d73357",
+                      "background": "#0e0e0e",
+                      "error": "#ff6e84",
+                      "primary-fixed-dim": "#7d88ff",
+                      "surface-container-highest": "#262626",
+                      "on-tertiary-fixed-variant": "#70165a",
+                      "tertiary-container": "#ff91da",
+                      "error-container": "#a70138",
+                      "on-tertiary": "#71175b",
+                      "on-secondary-container": "#e1ffec",
+                      "inverse-on-surface": "#565555",
+                      "primary-container": "#8e98ff",
+                      "surface-container-lowest": "#000000",
+                      "surface": "#0e0e0e",
+                      "tertiary-fixed": "#ff91da",
+                      "secondary-dim": "#58e7ab",
+                      "on-surface": "#ffffff",
+                      "on-surface-variant": "#adaaaa",
+                      "surface-tint": "#9fa7ff",
+                      "surface-container": "#1a1a1a",
+                      "tertiary": "#ffa9df",
+                      "surface-bright": "#2c2c2c",
+                      "on-background": "#ffffff",
+                      "outline": "#767575",
+                      "on-primary-fixed": "#000000",
+                      "surface-container-high": "#20201f",
+                      "primary-fixed": "#8e98ff",
+                      "on-primary-fixed-variant": "#000a99",
+                      "on-error-container": "#ffb2b9",
+                      "secondary": "#69f6b8",
+                      "on-secondary": "#005a3c",
+                      "surface-variant": "#262626",
+                      "primary-dim": "#5562f9",
+                      "on-secondary-fixed-variant": "#006544",
+                      "on-secondary-fixed": "#00452d",
+                      "on-error": "#490013",
+                      "surface-dim": "#0e0e0e",
+                      "tertiary-fixed-dim": "#f084cc",
+                      "inverse-primary": "#3d4ae2",
+                      "surface-container-low": "#131313",
+                      "on-primary-container": "#00077e"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "fontFamily": {
+                      "headline": ["Space Grotesk"],
+                      "body": ["Inter"],
+                      "label": ["Space Grotesk"],
+                      "mono": ["JetBrains Mono"]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-surface text-on-surface font-body overflow-hidden">
+<!-- SideNavBar (Authority: JSON) -->
+<aside class="h-screen w-64 fixed left-0 top-0 no-border bg-[#131313] flex flex-col p-4 font-['Space_Grotesk'] tracking-tight z-50">
+<div class="mb-10 px-4">
+<h1 class="text-xl font-bold text-[#9fa7ff] uppercase tracking-widest">QuarkusSES</h1>
+<p class="text-[10px] text-gray-500 font-mono">Tester v1.2</p>
+</div>
+<nav class="space-y-2 flex-grow">
+<a class="flex items-center gap-3 px-4 py-3 text-gray-500 hover:text-gray-300 hover:bg-[#1a1a1a] transition-colors duration-200 rounded-lg group scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-500 hover:text-gray-300 hover:bg-[#1a1a1a] transition-colors duration-200 rounded-lg group scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined">send</span>
+<span>Send Email</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#9fa7ff] font-bold bg-[#20201f] rounded-lg scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Configuration</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-500 hover:text-gray-300 hover:bg-[#1a1a1a] transition-colors duration-200 rounded-lg group scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined">terminal</span>
+<span>Logs</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-[#484847]/15">
+<div class="flex items-center gap-3 px-4 py-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center border border-outline-variant/15">
+<span class="material-symbols-outlined text-primary text-sm">person</span>
+</div>
+<div class="text-[10px] font-mono leading-tight">
+<p class="text-on-surface">SYS_ADMIN</p>
+<p class="text-primary/60">LOCAL_HOST</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- TopAppBar (Authority: JSON) -->
+<header class="fixed top-0 right-0 left-64 h-14 z-40 bg-[#0e0e0e]/80 backdrop-blur-xl flex justify-between items-center px-8 w-full border-b border-[#484847]/15">
+<div class="flex items-center gap-4">
+<span class="font-['Space_Grotesk'] text-sm uppercase tracking-tighter text-[#9fa7ff]">QuarkusSESTester</span>
+<span class="text-xs text-outline-variant">/</span>
+<span class="text-xs text-on-surface-variant font-mono">NODE_01</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity cursor-default">
+<span class="material-symbols-outlined text-[#9fa7ff] text-sm">sensors</span>
+<span class="font-['Space_Grotesk'] text-[10px] uppercase tracking-tighter text-[#9fa7ff]">SES Mock: Active</span>
+</div>
+<div class="flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity cursor-default">
+<span class="material-symbols-outlined text-[#9fa7ff] text-sm">account_tree</span>
+<span class="font-['Space_Grotesk'] text-[10px] uppercase tracking-tighter text-[#9fa7ff]">Daemon Status: Running</span>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-14 pb-8 min-h-screen bg-surface">
+<div class="p-8 grid grid-cols-12 gap-8 max-w-[1600px] mx-auto">
+<!-- Left Column: Settings -->
+<div class="col-span-12 lg:col-span-4 space-y-8">
+<section>
+<div class="mb-6">
+<h2 class="text-3xl font-headline font-bold tracking-tight text-white">Configuration</h2>
+<p class="text-on-surface-variant text-sm mt-1">Fine-tune the local SES daemon behavior.</p>
+</div>
+<div class="space-y-4">
+<!-- Daemon Config Card -->
+<div class="bg-surface-container p-6 rounded-xl border-l-2 border-primary">
+<h3 class="text-xs font-mono text-primary uppercase tracking-widest mb-6">Core Settings</h3>
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<div>
+<p class="font-headline font-medium text-on-surface">Mock Mode</p>
+<p class="text-xs text-on-surface-variant">Simulate SES without external calls</p>
+</div>
+<button class="w-10 h-5 bg-primary rounded-full relative transition-colors">
+<div class="absolute right-0.5 top-0.5 w-4 h-4 bg-on-primary rounded-full"></div>
+</button>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<p class="font-headline font-medium text-on-surface">Persistence</p>
+<p class="text-xs text-on-surface-variant">Store email history locally</p>
+</div>
+<button class="w-10 h-5 bg-surface-container-highest rounded-full relative transition-colors border border-outline-variant/30">
+<div class="absolute left-0.5 top-0.5 w-4 h-4 bg-outline rounded-full"></div>
+</button>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between">
+<label class="font-headline font-medium text-on-surface">Daemon Port</label>
+<span class="font-mono text-xs text-primary">8081</span>
+</div>
+<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" type="range"/>
+</div>
+<div class="pt-4 border-t border-outline-variant/10">
+<p class="font-headline font-medium text-on-surface mb-2">SMTP Relay Host</p>
+<input class="w-full bg-surface-container-low border-b border-outline-variant/30 focus:border-primary text-on-surface font-mono text-sm py-2 px-0 focus:ring-0 transition-colors" type="text" value="localhost:2525"/>
+</div>
+</div>
+</div>
+<!-- Danger Zone -->
+<div class="bg-surface-container-low p-6 rounded-xl border border-error-container/20">
+<h3 class="text-xs font-mono text-error uppercase tracking-widest mb-4">System Operations</h3>
+<p class="text-xs text-on-surface-variant mb-6">Restarting the daemon will terminate all active connections and clear the volatile cache.</p>
+<button class="w-full py-3 bg-error-container/10 hover:bg-error-container/20 text-error font-headline font-bold text-sm rounded-lg transition-colors border border-error-container/30 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">refresh</span>
+                                Restart Daemon
+                            </button>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Logs -->
+<div class="col-span-12 lg:col-span-8 space-y-6">
+<!-- Log Control Bar -->
+<div class="bg-surface-container p-4 rounded-xl flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-3 flex-grow max-w-md">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm font-mono w-full" placeholder="Filter logs (regex supported)..." type="text" value="level:info"/>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-mono text-on-surface-variant uppercase">Auto-scroll</span>
+<button class="w-8 h-4 bg-primary rounded-full relative">
+<div class="absolute right-0.5 top-0.5 w-3 h-3 bg-on-primary rounded-full"></div>
+</button>
+</div>
+<button class="flex items-center gap-2 px-3 py-1.5 bg-surface-container-highest rounded-lg text-xs font-mono hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">delete_sweep</span>
+                            Clear
+                        </button>
+<button class="flex items-center gap-2 px-3 py-1.5 bg-surface-container-highest rounded-lg text-xs font-mono hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">download</span>
+                            Export
+                        </button>
+</div>
+</div>
+<!-- Terminal Area -->
+<div class="bg-surface-container-lowest rounded-xl p-6 h-[calc(100vh-320px)] overflow-hidden flex flex-col border border-outline-variant/10 shadow-2xl relative">
+<!-- Progress Bar (HTMX Style) -->
+<div class="absolute top-0 left-0 right-0 h-0.5 bg-tertiary"></div>
+<div class="flex-grow overflow-y-auto space-y-1 font-mono text-[13px] leading-relaxed">
+<div class="flex gap-4 opacity-50">
+<span class="text-outline-variant shrink-0">14:02:01.442</span>
+<span class="text-secondary shrink-0">[INFO]</span>
+<span class="text-on-surface-variant">Quarkus SES Tester Extension starting...</span>
+</div>
+<div class="flex gap-4 opacity-50">
+<span class="text-outline-variant shrink-0">14:02:01.458</span>
+<span class="text-secondary shrink-0">[INFO]</span>
+<span class="text-on-surface-variant">Binding Mock SES to http://0.0.0.0:8081</span>
+</div>
+<div class="flex gap-4">
+<span class="text-outline-variant shrink-0">14:14:11.201</span>
+<span class="text-secondary shrink-0">[INFO]</span>
+<span class="text-on-surface">POST /admin/send-email (Request ID: <span class="text-primary-container">req_2841x</span>)</span>
+</div>
+<div class="flex gap-4">
+<span class="text-outline-variant shrink-0">14:14:11.205</span>
+<span class="text-tertiary shrink-0">[DEBUG]</span>
+<span class="text-on-surface-variant italic">Email content parsed: HTML size 12.4kb</span>
+</div>
+<div class="flex gap-4">
+<span class="text-outline-variant shrink-0">14:14:11.210</span>
+<span class="text-secondary-fixed shrink-0">[SUCCESS]</span>
+<span class="text-on-surface">Message accepted by mock provider. ID: <span class="text-secondary-fixed">msg_9918821</span></span>
+</div>
+<div class="flex gap-4">
+<span class="text-outline-variant shrink-0">14:15:33.119</span>
+<span class="text-error shrink-0">[ERROR]</span>
+<span class="text-error-dim">Failed to persist transaction to local disk: Permission Denied (/var/lib/quarkus/db.sqlite)</span>
+</div>
+<div class="flex gap-4">
+<span class="text-outline-variant shrink-0">14:15:33.120</span>
+<span class="text-tertiary shrink-0">[DEBUG]</span>
+<span class="text-on-surface-variant italic">Retrying persistence task in 500ms...</span>
+</div>
+<div class="flex gap-4">
+<span class="text-outline-variant shrink-0">14:21:05.441</span>
+<span class="text-secondary shrink-0">[INFO]</span>
+<span class="text-on-surface">DAEMON STATUS: Heartbeat received from controller.</span>
+</div>
+<div class="flex gap-4">
+<span class="text-outline-variant shrink-0">14:21:05.445</span>
+<span class="text-on-surface-variant">Uptime: 14d 2h 11m | Memory: 142MB / 512MB</span>
+</div>
+<!-- Empty states for simulated scrolling -->
+<div class="h-24"></div>
+<div class="flex gap-4 border-l-2 border-primary pl-3 bg-primary/5 py-2">
+<span class="text-outline-variant shrink-0">14:32:01.001</span>
+<span class="text-secondary shrink-0">[INFO]</span>
+<span class="text-primary font-bold">Partial swap detected: HTMX hx-trigger "log-update" fired.</span>
+</div>
+</div>
+</div>
+<!-- Metrics Footer -->
+<div class="grid grid-cols-4 gap-4">
+<div class="bg-surface-container p-4 rounded-xl">
+<p class="text-[10px] font-mono text-on-surface-variant uppercase">Throughput</p>
+<p class="text-xl font-headline font-bold text-white">4.2 req/s</p>
+</div>
+<div class="bg-surface-container p-4 rounded-xl">
+<p class="text-[10px] font-mono text-on-surface-variant uppercase">Latency</p>
+<p class="text-xl font-headline font-bold text-secondary">12ms</p>
+</div>
+<div class="bg-surface-container p-4 rounded-xl">
+<p class="text-[10px] font-mono text-on-surface-variant uppercase">Err Rate</p>
+<p class="text-xl font-headline font-bold text-error">0.4%</p>
+</div>
+<div class="bg-surface-container p-4 rounded-xl">
+<p class="text-[10px] font-mono text-on-surface-variant uppercase">Storage</p>
+<p class="text-xl font-headline font-bold text-tertiary">2.1 GB</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Confirmation Modal (Glassmorphism) -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-6 hidden">
+<div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+<div class="glass-panel relative w-full max-w-md p-8 rounded-xl border border-outline-variant/20 shadow-2xl">
+<h3 class="text-xl font-headline font-bold text-white mb-2">Restart Daemon?</h3>
+<p class="text-on-surface-variant text-sm mb-8">This will interrupt all active SMTP connections and reset the mock server environment. This action cannot be undone.</p>
+<div class="flex gap-4">
+<button class="flex-grow py-3 bg-surface-container-highest font-headline font-bold text-sm rounded-lg hover:bg-surface-bright transition-colors border border-outline-variant/15">Cancel</button>
+<button class="flex-grow py-3 bg-error font-headline font-bold text-sm rounded-lg text-on-error hover:opacity-90 transition-opacity">Confirm Restart</button>
+</div>
+</div>
+</div>
+<!-- Footer (Authority: JSON) -->
+<footer class="fixed bottom-0 right-0 left-64 h-8 bg-[#0e0e0e] border-t border-[#484847]/15 flex justify-between items-center px-8 w-full z-40">
+<div class="flex items-center gap-6">
+<span class="font-mono text-[10px] uppercase text-[#ffa9df]">Uptime: 14d 2h 11m</span>
+<span class="font-mono text-[10px] uppercase text-gray-600 hover:text-[#ffa9df] cursor-pointer">System Logs</span>
+</div>
+<span class="font-mono text-[10px] uppercase text-[#ffa9df]">v1.2.4-stable</span>
+</footer>
+<!-- Visual Accents (Editorial Aesthetics) -->
+<div class="fixed top-20 right-10 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none -z-10"></div>
+<div class="fixed bottom-20 left-80 w-64 h-64 bg-tertiary/5 rounded-full blur-[80px] pointer-events-none -z-10"></div>
+</body></html>

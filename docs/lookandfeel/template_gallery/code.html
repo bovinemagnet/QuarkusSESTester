@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#484847",
+                    "on-tertiary-fixed-variant": "#70165a",
+                    "on-error": "#490013",
+                    "surface-container-highest": "#262626",
+                    "on-secondary-fixed": "#00452d",
+                    "surface-container-high": "#20201f",
+                    "primary-fixed": "#8e98ff",
+                    "on-tertiary": "#71175b",
+                    "on-secondary": "#005a3c",
+                    "primary": "#9fa7ff",
+                    "tertiary-container": "#ff91da",
+                    "surface-container-lowest": "#000000",
+                    "background": "#0e0e0e",
+                    "on-primary-fixed": "#000000",
+                    "error-container": "#a70138",
+                    "on-secondary-fixed-variant": "#006544",
+                    "on-tertiary-fixed": "#3f0031",
+                    "surface": "#0e0e0e",
+                    "inverse-on-surface": "#565555",
+                    "on-primary-fixed-variant": "#000a99",
+                    "on-primary-container": "#00077e",
+                    "on-surface": "#ffffff",
+                    "tertiary-fixed-dim": "#f084cc",
+                    "on-error-container": "#ffb2b9",
+                    "surface-variant": "#262626",
+                    "surface-dim": "#0e0e0e",
+                    "on-secondary-container": "#e1ffec",
+                    "tertiary-fixed": "#ff91da",
+                    "on-background": "#ffffff",
+                    "inverse-primary": "#3d4ae2",
+                    "error-dim": "#d73357",
+                    "surface-bright": "#2c2c2c",
+                    "on-primary": "#000ba0",
+                    "error": "#ff6e84",
+                    "tertiary-dim": "#f084cc",
+                    "secondary-fixed": "#69f6b8",
+                    "tertiary": "#ffa9df",
+                    "primary-dim": "#5562f9",
+                    "secondary": "#69f6b8",
+                    "on-tertiary-container": "#640950",
+                    "primary-container": "#8e98ff",
+                    "surface-container-low": "#131313",
+                    "primary-fixed-dim": "#7d88ff",
+                    "on-surface-variant": "#adaaaa",
+                    "secondary-container": "#006c49",
+                    "outline": "#767575",
+                    "secondary-fixed-dim": "#58e7ab",
+                    "surface-container": "#1a1a1a",
+                    "inverse-surface": "#fcf9f8",
+                    "secondary-dim": "#58e7ab",
+                    "surface-tint": "#9fa7ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Space Grotesk"],
+                    "mono": ["JetBrains Mono"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #262626; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary selection:text-on-primary">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-[#131313] flex flex-col p-4 z-50">
+<div class="mb-10 px-2">
+<h1 class="text-xl font-bold text-[#9fa7ff] uppercase tracking-widest font-headline">QuarkusSES</h1>
+<p class="font-['Space_Grotesk'] tracking-tight text-gray-500 text-xs">Tester v1.2</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-gray-500 hover:text-gray-300 hover:bg-[#1a1a1a] transition-colors duration-200 group scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-['Space_Grotesk'] tracking-tight">Dashboard</span>
+</a>
+<!-- Active State: Templates -->
+<a class="flex items-center gap-3 px-3 py-2 text-[#9fa7ff] font-bold bg-[#20201f] rounded-lg scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="font-['Space_Grotesk'] tracking-tight">Templates</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-gray-500 hover:text-gray-300 hover:bg-[#1a1a1a] transition-colors duration-200 group scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="hub">hub</span>
+<span class="font-['Space_Grotesk'] tracking-tight">Node Network</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-gray-500 hover:text-gray-300 hover:bg-[#1a1a1a] transition-colors duration-200 group scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-['Space_Grotesk'] tracking-tight">Configuration</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-gray-500 hover:text-gray-300 hover:bg-[#1a1a1a] transition-colors duration-200 group scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span class="font-['Space_Grotesk'] tracking-tight">Logs</span>
+</a>
+</nav>
+<div class="mt-auto p-2 bg-surface-container-low rounded-xl">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="account_circle">account_circle</span>
+</div>
+<div>
+<p class="text-xs font-bold text-on-surface">root_user</p>
+<p class="text-[10px] text-gray-500 font-mono">192.168.1.42</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 left-64 h-14 z-40 bg-[#0e0e0e]/80 backdrop-blur-xl border-b border-[#484847]/15 flex justify-between items-center px-8 w-full">
+<div class="flex items-center gap-4">
+<span class="font-['Space_Grotesk'] text-sm uppercase tracking-tighter text-gray-400">Library</span>
+<span class="text-gray-600">/</span>
+<span class="font-['Space_Grotesk'] text-sm uppercase tracking-tighter text-[#9fa7ff]">Email Templates</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="sensors">sensors</span>
+<span class="font-['Space_Grotesk'] text-[10px] uppercase tracking-tighter text-[#9fa7ff]">Daemon Status: Running</span>
+</div>
+<div class="flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="account_tree">account_tree</span>
+<span class="font-['Space_Grotesk'] text-[10px] uppercase tracking-tighter text-[#9fa7ff]">SES Mock: Active</span>
+</div>
+<div class="h-4 w-[1px] bg-[#484847]/30"></div>
+<button class="material-symbols-outlined text-gray-400 hover:text-white transition-colors" data-icon="search">search</button>
+<button class="material-symbols-outlined text-gray-400 hover:text-white transition-colors" data-icon="notifications">notifications</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pl-64 pt-14 pb-8 min-h-screen">
+<div class="p-8 grid grid-cols-12 gap-8">
+<!-- Left Column: Gallery List -->
+<div class="col-span-12 lg:col-span-4 space-y-6">
+<div class="flex justify-between items-end">
+<div>
+<h2 class="text-2xl font-headline font-bold tracking-tight">Saved Templates</h2>
+<p class="text-xs text-on-surface-variant font-mono">Count: 14 objects</p>
+</div>
+<button class="bg-primary hover:bg-primary-container text-on-primary px-4 py-2 rounded-lg text-xs font-headline font-bold transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                        NEW_TEMPLATE
+                    </button>
+</div>
+<div class="space-y-3 custom-scrollbar overflow-y-auto max-h-[calc(100vh-220px)] pr-2">
+<!-- Template Item Active -->
+<div class="p-4 bg-surface-container-high rounded-xl border-l-2 border-primary group cursor-pointer transition-all hover:bg-surface-container-highest">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline font-bold text-sm tracking-wide text-primary">USER_WELCOME_V2</h3>
+<span class="text-[10px] font-mono px-2 py-0.5 bg-primary/10 text-primary rounded-full">SYSTEM</span>
+</div>
+<div class="grid grid-cols-2 gap-y-2">
+<div class="space-y-1">
+<p class="text-[10px] text-on-surface-variant uppercase font-headline tracking-tighter">Last Used</p>
+<p class="text-xs font-mono text-on-surface">2m ago</p>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] text-on-surface-variant uppercase font-headline tracking-tighter">Payload Size</p>
+<p class="text-xs font-mono text-on-surface">14.2 KB</p>
+</div>
+</div>
+</div>
+<!-- Template Item -->
+<div class="p-4 bg-surface-container-low rounded-xl border-l-2 border-transparent group cursor-pointer transition-all hover:bg-surface-container hover:border-outline-variant/30">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline font-bold text-sm tracking-wide text-on-surface group-hover:text-primary transition-colors">PASSWORD_RESET_FIN</h3>
+<span class="text-[10px] font-mono px-2 py-0.5 bg-on-surface-variant/10 text-on-surface-variant rounded-full">AUTH</span>
+</div>
+<div class="grid grid-cols-2 gap-y-2">
+<div class="space-y-1">
+<p class="text-[10px] text-on-surface-variant uppercase font-headline tracking-tighter">Last Used</p>
+<p class="text-xs font-mono text-on-surface">1h 12m ago</p>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] text-on-surface-variant uppercase font-headline tracking-tighter">Payload Size</p>
+<p class="text-xs font-mono text-on-surface">8.4 KB</p>
+</div>
+</div>
+</div>
+<!-- Template Item -->
+<div class="p-4 bg-surface-container-low rounded-xl border-l-2 border-transparent group cursor-pointer transition-all hover:bg-surface-container hover:border-outline-variant/30">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline font-bold text-sm tracking-wide text-on-surface group-hover:text-primary transition-colors">MONTHLY_REPORT_JSON</h3>
+<span class="text-[10px] font-mono px-2 py-0.5 bg-secondary-container text-secondary rounded-full">CRON</span>
+</div>
+<div class="grid grid-cols-2 gap-y-2">
+<div class="space-y-1">
+<p class="text-[10px] text-on-surface-variant uppercase font-headline tracking-tighter">Last Used</p>
+<p class="text-xs font-mono text-on-surface">1d ago</p>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] text-on-surface-variant uppercase font-headline tracking-tighter">Payload Size</p>
+<p class="text-xs font-mono text-on-surface">112.9 KB</p>
+</div>
+</div>
+</div>
+<!-- Template Item -->
+<div class="p-4 bg-surface-container-low rounded-xl border-l-2 border-transparent group cursor-pointer transition-all hover:bg-surface-container hover:border-outline-variant/30">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline font-bold text-sm tracking-wide text-on-surface group-hover:text-primary transition-colors">ALERT_CRITICAL_FAILURE</h3>
+<span class="text-[10px] font-mono px-2 py-0.5 bg-error-container text-error rounded-full">DEBUG</span>
+</div>
+<div class="grid grid-cols-2 gap-y-2">
+<div class="space-y-1">
+<p class="text-[10px] text-on-surface-variant uppercase font-headline tracking-tighter">Last Used</p>
+<p class="text-xs font-mono text-on-surface">Never</p>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] text-on-surface-variant uppercase font-headline tracking-tighter">Payload Size</p>
+<p class="text-xs font-mono text-on-surface">4.1 KB</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Preview Pane -->
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-6">
+<div class="bg-surface-container-low rounded-2xl overflow-hidden flex flex-col h-[calc(100vh-160px)]">
+<!-- Preview Header -->
+<div class="p-6 border-b border-outline-variant/15 flex justify-between items-center bg-surface-container">
+<div class="space-y-1">
+<div class="flex items-center gap-3">
+<h2 class="text-xl font-headline font-bold">USER_WELCOME_V2</h2>
+<span class="bg-primary/10 text-primary px-3 py-0.5 rounded text-[10px] font-mono border border-primary/20">UUID: 8823-FF-X9</span>
+</div>
+<p class="text-xs text-on-surface-variant font-mono">Modified: 2023-11-24 14:32:11 MST</p>
+</div>
+<div class="flex gap-3">
+<button class="bg-surface-container-highest hover:bg-surface-bright text-on-surface border border-outline-variant/15 px-4 py-2 rounded-lg text-xs font-headline font-bold transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="content_copy">content_copy</span>
+                                DUPLICATE
+                            </button>
+<button class="bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 px-4 py-2 rounded-lg text-xs font-headline font-bold transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="code">code</span>
+                                EDIT CODE
+                            </button>
+<button class="bg-primary hover:bg-primary-container text-on-primary px-6 py-2 rounded-lg text-xs font-headline font-bold transition-all flex items-center gap-2 shadow-lg shadow-primary/10">
+<span class="material-symbols-outlined text-sm" data-icon="send">send</span>
+                                SEND TEST
+                            </button>
+</div>
+</div>
+<!-- Preview Frame -->
+<div class="flex-1 bg-surface-container-lowest p-8 flex justify-center overflow-y-auto custom-scrollbar">
+<div class="w-full max-w-2xl bg-white rounded-lg shadow-2xl overflow-hidden">
+<div class="bg-[#2c2c2c] h-12 flex items-center px-4 gap-2">
+<div class="flex gap-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></div>
+</div>
+<div class="ml-4 bg-background/50 px-4 py-1 rounded text-[10px] text-gray-400 font-mono flex-1 text-center">
+                                    https://ses-mock.quarkus.local/preview/8823-FF-X9
+                                </div>
+</div>
+<!-- Actual Email Content Preview -->
+<div class="p-12 text-gray-800">
+<img class="w-16 h-16 mb-8" data-alt="minimalist tech logo with geometric shapes in gradient primary colors on a white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4w-yX6tLr8hyPplJBdC6C1fiFUx3EYeQHW3WnHi_kDFxgA1aS7il2eSeb-wzLEA2S-AlInr3t9baYZ47xovR_GhvmVxF83vTIQdLugI2vJCf-B2yJIbqYbeIEHA0SPHXUDpOGabeCjn-DwY9e7Wg3eBuy64HrdcYSmFR28RxTPYDtcyUCvLIMRWqqpdXjZmKdXd6PJguVFSESopFrASA3Fed5PUtz0vW-Fl2VJjzDzCGNmNoyuN8eahJYvaIU1yTApLumSVNMrki9"/>
+<h1 class="text-3xl font-bold text-gray-900 mb-4">Welcome to the Nexus, {{user_name}}</h1>
+<p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                                    Your environment has been provisioned successfully. You can now access all cluster resources via your localized dashboard.
+                                </p>
+<div class="bg-gray-100 p-6 rounded-lg mb-8 border border-gray-200">
+<p class="text-sm font-mono text-gray-500 mb-2 uppercase tracking-widest">Initialization Code</p>
+<p class="text-xl font-mono text-gray-900 font-bold">QX-9920-ALPHA</p>
+</div>
+<a class="inline-block bg-[#3d4ae2] text-white px-8 py-3 rounded font-bold hover:bg-[#000ba0] transition-colors" href="#">Go to Dashboard</a>
+<hr class="my-10 border-gray-100"/>
+<p class="text-xs text-gray-400 text-center uppercase tracking-widest">Powered by QuarkusSES Engine</p>
+</div>
+</div>
+</div>
+<!-- Preview Meta Footer -->
+<div class="p-4 bg-surface-container-high border-t border-outline-variant/15 grid grid-cols-4 gap-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant text-lg" data-icon="devices">devices</span>
+<div class="font-mono">
+<p class="text-[9px] text-on-surface-variant uppercase">Responsive</p>
+<p class="text-[11px] text-on-surface">HTML5/MJML</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant text-lg" data-icon="attachment">attachment</span>
+<div class="font-mono">
+<p class="text-[9px] text-on-surface-variant uppercase">Attachments</p>
+<p class="text-[11px] text-on-surface">None</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant text-lg" data-icon="speed">speed</span>
+<div class="font-mono">
+<p class="text-[9px] text-on-surface-variant uppercase">Load Time</p>
+<p class="text-[11px] text-on-surface">42ms</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-lg" data-icon="check_circle">check_circle</span>
+<div class="font-mono">
+<p class="text-[9px] text-on-surface-variant uppercase">Validation</p>
+<p class="text-[11px] text-secondary">Passed</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="fixed bottom-0 right-0 left-64 h-8 bg-[#0e0e0e] border-t border-[#484847]/15 flex justify-between items-center px-8 w-full z-40">
+<div class="flex gap-6">
+<span class="font-mono text-[10px] uppercase text-gray-600 hover:text-[#ffa9df] transition-colors cursor-default">Uptime: 14d 2h 11m</span>
+<span class="font-mono text-[10px] uppercase text-gray-600 hover:text-[#ffa9df] transition-colors cursor-pointer">System Logs</span>
+<span class="font-mono text-[10px] uppercase text-gray-600 hover:text-[#ffa9df] transition-colors cursor-pointer">API Status</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1.5">
+<div class="w-1.5 h-1.5 rounded-full bg-secondary"></div>
+<span class="font-mono text-[10px] uppercase text-gray-400">Node_01_Active</span>
+</div>
+<span class="font-mono text-[10px] uppercase text-[#ffa9df]">v1.2.4-stable</span>
+</div>
+</footer>
+</body></html>

@@ -1,7 +1,8 @@
-package com.example.sesmail;
+package com.paulsnow.sesmail;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 /**
@@ -10,8 +11,9 @@ import java.util.regex.Pattern;
 public class MailValidator {
 
     // RFC 5322-inspired simple email validation pattern
-    private static final Pattern EMAIL_PATTERN =
-            Pattern.compile("^[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$");
+    private static final Pattern EMAIL_PATTERN = Pattern.compile(
+        "^[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$"
+    );
 
     /**
      * Validates the request and returns a list of error messages.
@@ -23,13 +25,17 @@ public class MailValidator {
         if (isBlank(request.from())) {
             errors.add("--send-from is required");
         } else if (!isValidEmail(request.from())) {
-            errors.add("--send-from is not a valid email address: " + request.from());
+            errors.add(
+                "--send-from is not a valid email address: " + request.from()
+            );
         }
 
         if (isBlank(request.to())) {
             errors.add("--send-to is required");
         } else if (!isValidEmail(request.to())) {
-            errors.add("--send-to is not a valid email address: " + request.to());
+            errors.add(
+                "--send-to is not a valid email address: " + request.to()
+            );
         }
 
         if (isBlank(request.subject())) {
@@ -49,7 +55,9 @@ public class MailValidator {
     public List<String> validateRegion(String region) {
         List<String> errors = new ArrayList<>();
         if (isBlank(region)) {
-            errors.add("AWS region is required (use --aws-region or set AWS_REGION)");
+            errors.add(
+                "AWS region is required (use --aws-region or set AWS_REGION)"
+            );
         }
         return errors;
     }
@@ -61,17 +69,23 @@ public class MailValidator {
         List<String> warnings = new ArrayList<>();
 
         if (!isBlank(request.from()) && isSuspiciousDomain(request.from())) {
-            warnings.add("WARNING: sender domain appears to be a well-known public provider. "
-                    + "Ensure this address is verified in your SES account.");
+            warnings.add(
+                "WARNING: sender domain appears to be a well-known public provider. " +
+                    "Ensure this address is verified in your SES account."
+            );
         }
 
         if (!isBlank(request.from()) && !isBlank(request.to())) {
             String fromDomain = domainOf(request.from());
             String toDomain = domainOf(request.to());
             if (!fromDomain.equalsIgnoreCase(toDomain)) {
-                warnings.add("WARNING: sender and recipient are on different domains ("
-                        + fromDomain + " vs " + toDomain
-                        + "). Ensure the SES sandbox allows this recipient.");
+                warnings.add(
+                    "WARNING: sender and recipient are on different domains (" +
+                        fromDomain +
+                        " vs " +
+                        toDomain +
+                        "). Ensure the SES sandbox allows this recipient."
+                );
             }
         }
 
@@ -87,11 +101,16 @@ public class MailValidator {
         return s == null || s.isBlank();
     }
 
+    private static final Set<String> PUBLIC_EMAIL_DOMAINS = Set.of(
+        "gmail.com",
+        "yahoo.com",
+        "hotmail.com",
+        "outlook.com",
+        "live.com"
+    );
+
     private boolean isSuspiciousDomain(String email) {
-        String domain = domainOf(email).toLowerCase();
-        return domain.equals("gmail.com") || domain.equals("yahoo.com")
-                || domain.equals("hotmail.com") || domain.equals("outlook.com")
-                || domain.equals("live.com");
+        return PUBLIC_EMAIL_DOMAINS.contains(domainOf(email).toLowerCase());
     }
 
     private String domainOf(String email) {
